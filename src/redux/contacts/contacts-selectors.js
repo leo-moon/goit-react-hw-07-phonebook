@@ -1,10 +1,11 @@
-export const getAllContacts = store => store.contacts;
+export const getAllContacts = ({ contacts }) => contacts.items;
 export const getFilter = ({ filter }) => filter;
-export const getFilterContacts = ({ filter, contacts }) => {
-  if (!filter) return contacts;
+export const getFilterContacts = ({ contacts, filter }) => {
+  if (!filter) return contacts.items;
+
   const filterLower = filter.toLowerCase();
-  const contactsFilter = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filterLower)
+  const contactsFilter = contacts.items.filter(({ name }) =>
+    name.toLowerCase().includes(filterLower)
   );
   return contactsFilter;
 };
